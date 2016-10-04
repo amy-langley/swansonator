@@ -62,6 +62,10 @@ module.exports = {
           'style',
           'css?sourceMap!sass?sourceMap'
         )
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
@@ -81,7 +85,9 @@ module.exports = {
 
   // Array of file extensions used to resolve modules.
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.scss']
+    extensions: ['', '.js', '.jsx', '.css', '.scss', '.map', '.json']
   },
-
+  node: {
+    fs: 'empty'
+  }
 };
