@@ -26,9 +26,46 @@ class App extends React.Component {
       }
     }
   }
+  doQuery(){
+    this.setState({query: this.refs.queryField.value})
+  }
+  collect(nodes){
+    var prefix = '';
+    var accum = [];
+    var obj = null
+    for(var nodeIdx in nodes){
+      var node = nodes[nodeIdx]
+      var path = node.path
+      var whatAmI = path.pop()
+      var prefixNew = JSON.stringify(path)
+
+      if(prefix != prefixNew){
+        if(obj)
+          accum.push(obj)
+
+        obj = {}
+        prefix = prefixNew
+      }
+
+      obj[whatAmI] = node.value
+    }
+
+    return accum
+  }
+  apply() {
+    var nodes = jp.nodes(this.state.blob, this.state.query)
+    var result = this.collect(nodes);
+    return result
+  }
   render() {
-    console.log(jp.nodes(this.state.blob, this.state.query))
+    var collected = this.apply()
+    var present = {
+      fields: collected.length > 0 ? Object.keys(collected[0]) : [],
+      results: collected
+    }
+    var self = this;
     return(
+
      <div className='main-app container'>
         <div className="row">
           <div className="column column-80 column-offset-10">
@@ -40,13 +77,13 @@ class App extends React.Component {
         <div className="row">
           <div className="column column-80 column-offset-10">
             <label>JSONPath</label>
-            <input type="text" defaultValue={this.state.query}></input>
-            <button className="float-right">Apply</button>
+            <input type="text" ref="queryField" defaultValue={this.state.query}></input>
+            <button className="float-right" onClick={this.doQuery.bind(self)}>Apply</button>
           </div>
         </div>
         <div className="row">
           <div className="column column-80 column-offset-10">
-            <ResultGrid resultSet={this.state.resultSet}></ResultGrid>
+            <ResultGrid resultSet={present}></ResultGrid>
           </div>
         </div>
     </div>
