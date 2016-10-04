@@ -17,15 +17,25 @@ const App = () => (
             <h1>Swansonate!</h1>
             <p>We all love Ali Swanson. We all love JSON. But Ali Swanson hates JSON. Help me make Ali happy by building a tool that will help people build sensible CSV files from JSON files.</p>
             <textarea style={{'height': '200px'}}>{blob}</textarea>
-
-            <p></p>
-
+          </div>
+        </div>
+        <div className="row">
+          <div className="column column-80 column-offset-10">
+            <label>JSONPath</label>
+            <input type="text"></input>
+            <button className="float-right">Apply</button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="column column-80 column-offset-10">
             <table>
               <thead></thead>
                 <th>blah</th>
                 <th>blah</th>
                 <th>blah</th>
+                <th>blah</th>
               <tbody></tbody>
+                <td>blah</td>
                 <td>blah</td>
                 <td>blah</td>
                 <td>blah</td>
