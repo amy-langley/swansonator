@@ -28,6 +28,8 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.9.2",
+    "babyparse": "^0.4.6",
+    "jsonpath": "^0.2.7",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
   },
